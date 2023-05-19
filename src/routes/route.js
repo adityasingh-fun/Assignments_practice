@@ -50,6 +50,43 @@ router.get('/getMovieObject/:uniqueId',function(req,res){
 })
 
 
+let players = [
+    {
+        name: "manish",
+        dob: "1/1/1995",
+        gender: "male",
+        city: "jalandhar",
+        sports: ["swimming"]
+    },
+    {
+        name: "Aditya",
+        dob: "1/1/1997",
+        gender: "male",
+        city: "Ghaziabad",
+        sports: ["snooker"]
+    },
+    {
+        name: "Vishal",
+        dob: "1/1/1994",
+        gender: "male",
+        city: "Delhi",
+        sports: ["cricket"]
+    }
+]
+
+router.post('/addPlayer',function(req,res){
+    let data = req.body;
+    let addedPlayer = req.body.name
+    for(let i=0;i<players.length;i++){
+        if(players[i].name == req.body.name){
+            return res.send({msg:"Player already exists with this name",addedPlayer})
+        }
+    }
+    players.push(data);
+    console.log(players);
+    res.send({msg:players});
+})
+
 router.get('/test-me', function (req, res) {
     res.send('This should be working!')
 });
