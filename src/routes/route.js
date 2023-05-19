@@ -5,91 +5,32 @@ const commonFile = require('./common')
 const myUnderscore = require('underscore')
 
 
-
-let arr = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins'];
-
-router.get('/getMovies', function (req, res) {
-    res.send({ msg: arr })
-})
-
-
-router.get('/getMovies/:indexNumber', function (req, res) {
-    let index = req.params.indexNumber
-    if (index < 0 || index >= arr.length) {
-        return res.send({ msg: "Invalid Index" })
+const arr2 = [1,2,3,5,6,7];
+router.get('/missingNumber',function(req,res){
+    let n = arr2[arr2.length-1]
+    console.log(n)
+    let sumOfNaturalNos = (n*(n+1))/2;
+    let sumOfarr = 0;
+    for(let i=0;i<arr2.length;i++){
+        sumOfarr = sumOfarr + arr2[i];
     }
-    res.send({ msg: arr[index] })
+    let missingNo = sumOfNaturalNos - sumOfarr;
+    console.log("Missing number is",missingNo);
 })
 
-let movieArr = [{
-    id: 1,
-    name: 'The Shining'
-}, {
-    id: 2,
-    name: 'Incendies'
-}, {
-    id: 3,
-    name: 'Rang de Basanti'
-}, {
-    id: 4,
-    name: 'Finding Nemo'
-}]
-
-router.get('/getMovieObject',function(req,res){
-    res.send({msg:movieArr})
-})
-
-router.get('/getMovieObject/:uniqueId',function(req,res){
-    let id = req.params.uniqueId
-    for(let i=0;i<movieArr.length;i++){
-        if(movieArr[i].id == id){
-            return res.send({msg:movieArr[i]})
-        }
+const arr3 = [33,34,35,37,38];
+router.get('/missingNumber2',function(req,res){
+    let n = arr3.length;
+    let last = arr3[n-1];
+    let first = arr3[0];
+    let sumOfAP = ((n+1)*(first+last))/2;       // here we are using n+1 because there is a number missing from AP therefore we are adding 1
+    let sumOfarr = 0;
+    for(let i=0;i<arr3.length;i++){
+        sumOfarr = sumOfarr + arr3[i];
     }
-    res.send({msg:"Invalid id"})
+    let missingNumber = sumOfAP - sumOfarr;
+    res.send({msg:missingNumber});
 })
-
-
-let players = [
-    {
-        name: "manish",
-        dob: "1/1/1995",
-        gender: "male",
-        city: "jalandhar",
-        sports: ["swimming"]
-    },
-    {
-        name: "Aditya",
-        dob: "1/1/1997",
-        gender: "male",
-        city: "Ghaziabad",
-        sports: ["snooker"]
-    },
-    {
-        name: "Vishal",
-        dob: "1/1/1994",
-        gender: "male",
-        city: "Delhi",
-        sports: ["cricket"]
-    }
-]
-
-router.post('/addPlayer',function(req,res){
-    let data = req.body;
-    let addedPlayer = req.body.name
-    for(let i=0;i<players.length;i++){
-        if(players[i].name == req.body.name){
-            return res.send({msg:"Player already exists with this name",addedPlayer})
-        }
-    }
-    players.push(data);
-    console.log(players);
-    res.send({msg:players});
-})
-
-router.get('/test-me', function (req, res) {
-    res.send('This should be working!')
-});
 
 router.get('/test-you', function (req, res) {
     console.log('The exported module is: ', commonFile)
