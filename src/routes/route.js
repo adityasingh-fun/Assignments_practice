@@ -10,6 +10,16 @@ router.get("/test-me", function (req, res) {
 
 router.post("/createUser", UserController.createUser  )
 
+router.get('/booksAndAuthors',BookController.booksAndAuthors)
+
+router.post('/getBooksInyear',BookController.getBooksInyear)
+
+router.get('/getPriceBooks',BookController.getPriceBooks)
+
+router.get('/getRandomBooks',BookController.getRandomBooks)
+
+router.post('/getParticularBooks',BookController.getParticularBooks)
+
 router.get("/getUsersData", UserController.getUsersData)
 
 router.post("/createBook", BookController.createBook  )
